@@ -1,6 +1,11 @@
 CREATE DATABASE IF NOT EXISTS library_db;
 USE library_db;
 
+-- Eliminar tablas si existen
+DROP TABLE IF EXISTS books;
+DROP TABLE IF EXISTS users;
+
+-- Crear tablas
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL UNIQUE,

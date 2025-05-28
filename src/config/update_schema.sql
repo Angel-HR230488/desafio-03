@@ -1,0 +1,25 @@
+-- Actualizar tabla users si es necesario
+ALTER TABLE users
+    MODIFY COLUMN email VARCHAR(255) NOT NULL UNIQUE,
+    MODIFY COLUMN password VARCHAR(255) NOT NULL,
+    MODIFY COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    MODIFY COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+-- Actualizar tabla books si es necesario
+ALTER TABLE books
+    MODIFY COLUMN title VARCHAR(255) NOT NULL,
+    MODIFY COLUMN author VARCHAR(255) NOT NULL,
+    MODIFY COLUMN status ENUM('leyendo', 'completado', 'por_leer') DEFAULT 'por_leer',
+    MODIFY COLUMN start_date DATE NULL,
+    MODIFY COLUMN end_date DATE NULL,
+    MODIFY COLUMN comments TEXT NULL,
+    MODIFY COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    MODIFY COLUMN updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+-- Asegurarse de que existe la llave foránea
+ALTER TABLE books
+    DROP FOREIGN KEY IF EXISTS books_ibfk_1;
+
+ALTER TABLE books
+    ADD CONSTRAINT books_ibfk_1
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE; 
