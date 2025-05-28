@@ -55,8 +55,9 @@ app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 }); 
 
-app.get("/api/test", (req, res) => {
-    res.json({ message: "✅ Backend activo en Railway" });
-});
+app.get("/", (req, res) => {
+    res.send("✅ Backend activo en Railway");
+  });
+  
 
 
